@@ -1,0 +1,39 @@
+@(tasks: List[Task], taskForm: Form[Task])
+
+@import helper._
+
+@main("Todo list") {
+
+    <h1>@tasks.size() number(s)</h1>
+
+    <ul>
+        @for(task <- tasks) {
+            <li>
+                @task.number
+
+                @form(routes.Application.deleteTask(task.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+
+
+
+    <h2><i>Add a new number </i></h2>
+    @form(routes.Application.newTask()) {
+
+        @inputText(taskForm("number"))
+
+        <input type="submit" value="Add    ">
+    }
+
+
+    <h2></h2>
+    @form(routes.Application.sort(20L)) {
+
+         @inputText(taskForm("email_address"))
+
+         <input type="submit" value="Sort     " />
+    }
+}
